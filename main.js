@@ -36,3 +36,46 @@ function gotPoses(results){
         console.log("leftwristX="+leftwristX+"leftwristY="+leftwristY+"rightwristX"+rightwristX+"rightwristY"+rightwristY);
     }
 }
+
+function draw(){
+    image(video,0,0,600,500);
+    fill("lightblue");
+    stroke("lightblue");
+    circle(rightwristX,rightwristY,20);
+    if(rightwristY>0&&rightwristY<=100){
+        document.getElementById("speed").innerHTML="Speed=0.5x";
+        song.rate(0.5);
+    }
+    else if(rightwristY>100&&rightwristY<=200){
+        document.getElementById("speed").innerHTML="Speed=1x";
+        song.rate(1);
+    }
+    else if(rightwristY>200&&rightwristY<=300){
+        document.getElementById("speed").innerHTML="Speed=1.5x";
+        song.rate(1.5);
+    }
+    else if(rightwristY>300&&rightwristY<=400){
+        document.getElementById("speed").innerHTML="Speed=2x";
+        song.rate(2);
+    }
+    else if(rightwristY>400&&rightwristY<=500){
+        document.getElementById("speed").innerHTML="Speed=2.5x";
+        song.rate(2.5);
+    }
+    if(scoreLeftwrist>0.2){
+    circle(leftwristX,leftwristY,20);
+    inNumberLeftwristY=Number(leftwristY);
+    Remove_decimals=floor(inNumberLeftwristY);
+    volume=Remove_decimals/500;
+    document.getElementById("volume").innerHTML="Volume= "+volume;
+    song.setVolume(volume);
+}
+}
+
+function preload(){
+    sound=loadSound("animals.mp3");
+}
+
+function play(){
+    sound.play();
+}
